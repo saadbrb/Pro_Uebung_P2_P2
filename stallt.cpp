@@ -216,9 +216,9 @@ void StallT::pushSchet(int geburtsjahr,std::string name,bool kinderlieb){
 
     PonyT* objkt = new ShetlandponyT(geburtsjahr,name,kinderlieb,0,0);
     if(einstellen(objkt)) {
-        std::cout<<"\n++++++++++++++++++++++++++++++++\n";
-        std::cout<<"Pony wurde erfolgreich eingefuegt\n";
-        std::cout<<"++++++++++++++++++++++++++++++++\n";
+//        std::cout<<"\n++++++++++++++++++++++++++++++++\n";
+//        std::cout<<"Pony wurde erfolgreich eingefuegt\n";
+//        std::cout<<"++++++++++++++++++++++++++++++++\n";
     }
     else {
         std::cout<<"Pferdeboxen ist leider ganz voll!\n";
@@ -228,9 +228,9 @@ void StallT::pushSchet(int geburtsjahr,std::string name,bool kinderlieb){
 void StallT::pushIsland(int geburtsjahr,std::string name,bool ekzemer){
     PonyT* objkt = new IslandpferdT(geburtsjahr,name,ekzemer,0,0);
     if(einstellen(objkt)) {
-        std::cout<<"\n++++++++++++++++++++++++++++++++\n";
-        std::cout<<"Pony wurde erfolgreich eingefuegt\n";
-        std::cout<<"++++++++++++++++++++++++++++++++\n";
+//        std::cout<<"\n++++++++++++++++++++++++++++++++\n";
+//        std::cout<<"Pony wurde erfolgreich eingefuegt\n";
+//        std::cout<<"++++++++++++++++++++++++++++++++\n";
     }
     else {
         std::cout<<"Pferdeboxen ist leider ganz voll!\n";
@@ -254,5 +254,11 @@ void StallT::weidegang(std::vector<PonyT*> &weide){
             weide.push_back(pferdeboxen[i]);
             pferdeboxen[i] = nullptr; // auf nullptr setzen, damit wir keine unbeabsichtigten Zugriffe auf gelöschte Objekte haben
         }
+    }
+}
+
+void StallT::deletAllElemnt(){
+    for(unsigned i=0; i<N; i++){
+        pferdeboxen[i] = nullptr;
     }
 }

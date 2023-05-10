@@ -26,12 +26,13 @@ public:
     void userDialog();
     void ponyHolen();
     void feierabend();
+    void dateiEinlesen();
     ~PonyhofT(){
 
         feierabend();
 
         // Öffne eine Textdatei zum Schreiben
-        std::ofstream file("C:/Users/saadb/OneDrive/Dokumente/Pro_Uebung_P2_P2/PonyT.txt#");
+        std::ofstream file("C:/Users/saadb/OneDrive/Desktop/Pro_Uebung_P2_P2/PonyT.txt");
         if (!file.is_open()) {
             std::cout << "Datei konnte nicht geöffnet werden. Also wurde wegen dieser Fehler nichts gespeichert" << std::endl;
             return;

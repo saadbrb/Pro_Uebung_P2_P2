@@ -31,6 +31,7 @@ public:
     float durchschnittsalter();
     void weidegang(std::vector<PonyT*> &weide);
     void zeigInfo();
+    void deletAllElemnt();
     void ponyAnlegen();
     int checkInt();
     int berechneJahr();
