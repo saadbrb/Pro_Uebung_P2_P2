@@ -39,6 +39,7 @@ public:
     void pushSchet(int geburtsjahr,std::string name,bool kinderlieb);
     void pushIsland(int geburtsjahr,std::string name,bool ekzemer);
     ~StallT(){
+
         for(PonyT* A: pferdeboxen){
             delete A;
         }

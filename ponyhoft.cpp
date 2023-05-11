@@ -1,5 +1,6 @@
 #include "ponyhoft.h"
 using namespace std;
+
 PonyhofT::PonyhofT() {
 
     dateiEinlesen();
@@ -7,14 +8,17 @@ PonyhofT::PonyhofT() {
 
 }
 void PonyhofT::dateiEinlesen(){
-
+    //hier hendelt es um neueu version: of binöre bzw. ASCI
+    #ifdef WRITE_BIN
     stallung.deletAllElemnt();
+    std::cout << "Binary writer called...\n";
+    std::ifstream infile("C:/Users/saadb/OneDrive/Desktop/Pro_Uebung_P2_P2/ponyst.bin", std::ios::in | std::ios::binary);
 
     try{
 
-        ifstream infile("C:/Users/saadb/OneDrive/Desktop/Pro_Uebung_P2_P2/PonyT.txt"); // Öffnen der Datei "ponys.txt"
+        //ifstream infile("C:/Users/saadb/OneDrive/Desktop/Pro_Uebung_P2_P2/PonyT.txt"); // Öffnen der Datei "ponys.txt"
         if (!infile.is_open()) {
-            throw "Datei konnte nicht geoeffnet werden!";
+            throw "Datei pony.bin konnte nicht geoeffnet werden!";
         }
 
 
@@ -72,7 +76,7 @@ void PonyhofT::dateiEinlesen(){
             std::string wahl;
             std::cout<<"Neu einlesen [e] oder abbrechen [a]? "; std::cin>>wahl;
             if(wahl=="e"){
-                std::cout<<"Wurde nochmals versuchen, Datei zu oeffnen!\n";
+                std::cout<<"Wurde nochmals versuchen, Datei ponyst.bin zu oeffnen!\n";
                 i++;
                 dateiEinlesen();
             }
@@ -94,7 +98,7 @@ void PonyhofT::dateiEinlesen(){
             std::string wahl;
             std::cout<<"Neu einlesen [e] oder abbrechen [a]? "; std::cin>>wahl;
             if(wahl=="e"){
-                std::cout<<"Lese Datei ab Zeile "<<number<<" neu ein...!\n";
+                std::cout<<"Lese Datei (ponyst.bin) ab Zeile "<<number<<" neu ein...!\n";
                 i++;
                 dateiEinlesen();
             }
@@ -107,6 +111,109 @@ void PonyhofT::dateiEinlesen(){
             }
         }
     }
+      #else
+    stallung.deletAllElemnt();
+
+      try{
+
+          ifstream infile("C:/Users/saadb/OneDrive/Desktop/Pro_Uebung_P2_P2/PonyT.txt"); // Öffnen der Datei "ponys.txt"
+          if (!infile.is_open()) {
+              throw "Datei pony.txt konnte nicht geoeffnet werden!";
+          }
+
+
+          int geburtsJahr_;
+          std::string name_;
+          std::string pony_art;
+
+          char frage_zum_y_n;
+          int zeilennummer = 0;
+          // Einlesen der Ponys und Hinzufügen zum Stall
+          while (infile >> pony_art >> name_ >> geburtsJahr_ >> frage_zum_y_n) {
+              zeilennummer++;
+
+              if(pony_art == "Islandpferd"){
+                  bool test = true;
+                  if(frage_zum_y_n == 'y'){
+                      test = true;
+                  }
+                  else if (frage_zum_y_n == 'n') {
+                      test = false;
+                  }
+                  else {
+                      //hier
+                      throw (zeilennummer);
+                  }
+                  stallung.pushIsland(geburtsJahr_, name_, test);
+              }
+              else if (pony_art == "Shetlandpony") {
+                  bool test =true ;
+                  if(frage_zum_y_n == 'y'){
+                      test = true;
+                  }
+                  else if (frage_zum_y_n == 'n') {
+                      test = false;
+                  }
+                  else {
+                      //hier
+                      throw (zeilennummer);
+                  }
+                  stallung.pushSchet(geburtsJahr_, name_, test);
+              }
+              else {
+                  throw (zeilennummer);
+                  //hier name
+                  //std::cout<<"Ponyart ist leider nicht erkannt, daher wurde kein Pony am Pferderbosen reingefuegt!\n";
+              }
+          }
+
+          infile.close(); // Schließen der Datei "ponys.txt"
+      }
+      catch(const char* fehler){
+          std::cout<<fehler<<"\n";
+          int  i=0;
+          while (!i) {
+              std::string wahl;
+              std::cout<<"Neu einlesen [e] oder abbrechen [a]? "; std::cin>>wahl;
+              if(wahl=="e"){
+                  std::cout<<"Wurde nochmals versuchen, Datei pony.txt zu oeffnen!\n";
+                  i++;
+                  dateiEinlesen();
+              }
+              else if (wahl=="a") {
+                  std::cout<<"Abbrechung wurde bestaetigt!\n";
+                  i++;
+              }
+              else {
+                  std::cout<<"Falsche Eingabe! Bitte nochamls versuchen\n";
+              }
+          }
+
+
+      }
+      catch(int number){
+          std::cout<<"Falsches Format in Zeile "<<number<<"!\n";
+          int i=0;
+          while (!i) {
+              std::string wahl;
+              std::cout<<"Neu einlesen [e] oder abbrechen [a]? "; std::cin>>wahl;
+              if(wahl=="e"){
+                  std::cout<<"Lese Datei (pony.txt) ab Zeile "<<number<<" neu ein...!\n";
+                  i++;
+                  dateiEinlesen();
+              }
+              else if (wahl=="a") {
+                  std::cout<<"Abbrechung wurde bestaetigt!\n";
+                  i++;
+              }
+              else {
+                  std::cout<<"Falsche Eingabe! Bitte nochamls versuchen\n";
+              }
+          }
+      }
+#endif
+
+
 }
 void PonyhofT::feierabend(){
 
