@@ -23,11 +23,11 @@ private:
     std::vector<PonyT*> weide;
 public:
     //    PonyhofT(const std::string& datei);
-    PonyhofT();
+    PonyhofT(std::string filename);
     void userDialog();
     void ponyHolen();
     void feierabend();
-    void dateiEinlesen();
+    void dateiEinlesen( const std::string filename);
     ~PonyhofT(){
 
         feierabend();
@@ -65,7 +65,7 @@ public:
         #else
         std::cout << "ASCII writer called...\n";
         // std::ofstream outfile("ponyst.txt");
-          std::ofstream file("C:/Users/saadb/OneDrive/Desktop/Pro_Uebung_P2_P2/PonyT.txt");
+          std::ofstream file("C:/Users/saadb/OneDrive/Desktop/Pro_Uebung_P2_P2/ponyst.txt");
 
         if (!file.is_open()) {
             std::cout << "Datei ponys.txt konnte nicht geöffnet werden. Also wurde wegen dieser Fehler nichts gespeichert" << std::endl;
